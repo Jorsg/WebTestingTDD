@@ -13,7 +13,7 @@ namespace WebApiTesting.Core.Models
         }
 
         public int Id { get; set; }
-        public byte[] NombresCompletos { get; set; }
+        public string NombresCompletos { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Genero { get; set; }
         public string TipoDocumento { get; set; }

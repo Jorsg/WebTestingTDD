@@ -1,20 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebApiTesting.Core.Models;
 using WebApiTesting.Core;
+using WebApiTesting.Core.Models;
 using WebApiTesting.Core.Repositories;
+using WebApiTesting.Core.Repositories.Interfaces;
 using WebApiTesting.Core.Web;
 
 
@@ -35,6 +30,7 @@ namespace WebApiTesting.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PruebaContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ConnectionSql")));
+            services.AddScoped<IPasajero, PasajeroRepository>();
             services.AddControllers();            
 
             services.Configure<ApiBehaviorOptions>(op =>
@@ -46,7 +42,7 @@ namespace WebApiTesting.Api
                 };
             });
 
-            services.AddScoped<IUsers, MemoryUsersRepository>();
+           // services.AddScoped<IUsers, MemoryUsersRepository>();
 
             services.AddSwaggerGen(c =>
             {

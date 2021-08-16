@@ -20,9 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="WebApiTesting.Core">
-      <HintPath>..\..\WebApiTesting.Core\WebApiTesting.Core\bin\Debug\net5.0\WebApiTesting.Core.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\WebApiTesting.Core\WebApiTesting.Core\WebApiTesting.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="WebApiTesting.Core.Web">
       <HintPath>..\..\WebApiTesting.Core.Web\WebApiTesting.Core.Web\bin\Debug\net5.0\WebApiTesting.Core.Web.dll</HintPath>
     </Reference>

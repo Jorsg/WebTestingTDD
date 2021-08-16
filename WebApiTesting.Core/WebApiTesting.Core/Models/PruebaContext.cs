@@ -86,7 +86,8 @@ namespace WebApiTesting.Core.Models
 
                 entity.Property(e => e.NombresCompletos)
                     .IsRequired()
-                    .HasMaxLength(250);
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.NumDocumento)
                     .IsRequired()
