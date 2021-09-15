@@ -18,9 +18,22 @@ namespace WebApiTesting.Core.Repositories
             _context = context;
         }
 
-        public bool DeletePasajero(Pasajero pasajero)
+        public bool DeletePasajero(int id)
         {
-            throw new NotImplementedException();
+            bool respuesta = false;
+            try
+            {
+                var result = _context.Pasajeros.FirstOrDefault(p => p.Id == id);
+                var deletPasajero = _context.Pasajeros.Remove(result);
+                Save();
+                respuesta = true;
+            }
+            catch (Exception ex)
+            {
+                _ = ex.Message;
+                
+            }
+            return respuesta;            
         }
 
         public IQueryable<Pasajero> GetAll()
@@ -47,7 +60,22 @@ namespace WebApiTesting.Core.Repositories
 
         public bool UpdatePasajero(Pasajero pasajero)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            try
+            {
+                var upTraveler = _context.Pasajeros.Update(pasajero).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                Save();
+                result = true;
+            }
+            catch (Exception)
+            {
+                throw new ArgumentNullException(nameof(pasajero));
+            }
+            return result;           
         }
+
+        
+
+
     }
 }

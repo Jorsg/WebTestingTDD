@@ -18,7 +18,7 @@ namespace WebApiTesting.Core.Repositories.Interfaces
 
         bool UpdatePasajero(Models.Pasajero pasajero);
 
-        bool DeletePasajero(Models.Pasajero pasajero);
+        bool DeletePasajero(int id);
 
     }
 }

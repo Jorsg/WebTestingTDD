@@ -4,44 +4,44 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApiTesting.Core.Repositories.Interfaces;
 using WebApiTesting.Core.Models;
+using WebApiTesting.Core.Repositories.Interfaces;
 
 namespace WebApiTesting.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PasajeroController : ControllerBase
+    public class ReservaController : ControllerBase
     {
-        private readonly IPasajero _pasajero;
+        private readonly IReserva _reserva;
 
-        public PasajeroController(IPasajero pasajero)
+        public ReservaController(IReserva reserva)
         {
-            _pasajero = pasajero;
+            _reserva = reserva;
         }
 
         [HttpGet]
-        public IActionResult GetPasajero()
-        {
-            var result = _pasajero.GetAll();
-            if(result is null)
+        public async Task<IActionResult> GetReserva()
+{
+            var result = await _reserva.GetAll();
+            if (result is null)
                 return NotFound();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetPasajero(int id)
+        public async Task<IActionResult> GetReserva(int id)
         {
-            var result = _pasajero.GetAll(id);
+            var result = await _reserva.GetAll(id);
             if (result is null)
                 return NotFound();
             return Ok(result);
         }
 
         [HttpPost]
-        public IActionResult PostPasajero(Pasajero traveler)
+        public async Task<IActionResult> PostReserva(Reserva reserva)
         {
-            var result = _pasajero.InsertPasajero(traveler);
+            var result = await _reserva.CreateReserva(reserva);
             if (result > 0)
                 return NotFound();
 
@@ -49,9 +49,9 @@ namespace WebApiTesting.Api.Controllers
         }
 
         [HttpPut]
-        public IActionResult PutPasajero(Pasajero traveler)
+        public async Task<IActionResult> PutReserva(Reserva reserva)
         {
-            var result = _pasajero.UpdatePasajero(traveler);
+            var result = await _reserva.UpdateReserva(reserva);
             if (!result)
                 return NotFound();
 
@@ -59,13 +59,12 @@ namespace WebApiTesting.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeletePasajero(int id)
+        public async Task<IActionResult> DeleteReserva(int id)
         {
-            var result = _pasajero.DeletePasajero(id);
-            if(!result)
+            var result = await _reserva.DeleteReserva(id);
+            if (!result)
                 return NotFound();
             return Ok(result);
         }
-
     }
 }
